@@ -2,16 +2,16 @@ source('/Users/neekahaack/Desktop/Typas_internship/Michael-Knopp/scripts/utils.r
 
 #load in data
 data <- read_csv2(
-  here("data", "Nic_Main_Screen.csv")
+  here("data", "Main_screen.csv")
 )
 print(data)
 
 #manipulate data
 filtered_data <- data %>%
-  mutate(
-    GFP = recode(GFP, "RFP" = "wt"),
-    RFP = recode(RFP, "RFP" = "wt"),
-  ) %>%
+  #mutate(
+  #  GFP = recode(GFP, "RFP" = "wt"),
+  #  RFP = recode(RFP, "RFP" = "wt"),
+  #) %>%
   filter(!(GFP == "wt" & RFP == "wt")) %>%
   mutate(
     Mutant = if_else(
@@ -41,32 +41,39 @@ plot_object <- ggplot(
     fill = Mutant
   )
 ) +
-scale_x_discrete(expand = expansion(add = 0.2)
+scale_x_discrete(expand = expansion(add = 0.4)
 ) +
 geom_hline(
   yintercept = 0,
   alpha = 0.3
 ) +
 geom_boxplot(
-  position = position_dodge(width = 0.9),
+  width = 0.5, 
+  position = position_dodge(width = 0.6), #0.9
   outlier.shape = NA   # suppress outliers from boxplot
 ) +
 geom_jitter(
-  position = position_jitterdodge(dodge.width = 1, jitter.width = 0.4),
+  position = position_jitterdodge(dodge.width = 0.6, jitter.width = 0.1),
   alpha = 1,
   size = 0.1
 ) + # plot all points (including "outliers")
 labs(
   x = NULL,
   y = "Selection Coefficient",
-  title = "Fitness Assay of Mutants"
+  fill = "Strain"
+  #title = "Fitness Assay of Mutants"
 ) +
 theme_presentation(
 ) +
-theme(axis.text.x = element_text(
+scale_fill_brewer(palette = "Greys", name = "Strain"
+) +
+theme(
+  axis.text.x = element_text(
     angle = 45,
     hjust = 1),
-  legend.position = c(0.99, 0.98),
+  axis.text.y = element_text(
+    size = 8),
+  legend.position = c(0.99, 0.99),
   legend.justification = c(1, 1),
   legend.text  = element_text(size = 8),
   legend.title = element_text(size = 9),
@@ -84,8 +91,8 @@ ggsave(
   filename = here(
     "results",
     "plots",
-    "Fitness_assay_of_mutants.pdf"
+    "Fitness_assay_of_mutants_redo.pdf"
   ),
-  width = 5.8,
+  width = 18,
   height = 5
 )

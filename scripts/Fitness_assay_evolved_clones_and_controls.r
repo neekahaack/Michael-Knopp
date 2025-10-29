@@ -3,7 +3,7 @@ source('/Users/neekahaack/Desktop/Typas_internship/Michael-Knopp/scripts/utils.r
 data <- read_csv2(
   here(
     "data",
-    "Nic_evolved_clones.csv"
+    "Main_screen.csv"
   )
 )
 print(data)
@@ -62,7 +62,7 @@ ggsave(
   filename = here(
     "results",
     "plots",
-    "Fitness_assay_of_evolved_clones_and_controls.pdf"
+    "Fitness_assay_of_evolved_clones_and_controls_.pdf"
   ),
   width = 8,
   height = 6
