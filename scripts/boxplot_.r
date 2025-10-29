@@ -73,7 +73,7 @@ theme(
     hjust = 1),
   axis.text.y = element_text(
     size = 8),
-  legend.position = c(0.99, 0.99),
+  legend.position = c(0.99, 0.97),
   legend.justification = c(1, 1),
   legend.text  = element_text(size = 8),
   legend.title = element_text(size = 9),
